@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regifting Robin</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Nunito' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .pheading {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            color: white;
+            font-size: 45px;
+            margin-left: 12px;
+        }
+        .pcontent{
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            color: white;
+            font-size: 30px;
+            margin-left: 12px;
+            text-wrap: auto;
+        }
+        #content {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .robbin {
+            width: 100%;
+            background-color: #3300ff;
+            padding: 20px;
+            padding-bottom: 30px;
+        }
+        .inner-div {
+            width: 98%;
+            background-color: #4E54F0;
+            padding: 5px;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+        .robbin .button {
+            display: inline-block;
+            padding: 10px 40px; /* Add padding for better look */
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            color: white;
+            font-size: 25px;
+            margin-left: 10px;
+            margin-bottom: 15px;
+            background-color: darkblue;
+            cursor: pointer; /* Optional: make it look more like a button */
+        }
+        .image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* Ensures the image is clipped when it overflows */
+            box-sizing: border-box; /* Includes padding and border in width/height calculations */
+            padding-right: 10px; /* Optional padding to create buffer from the edge */
+        }
+        .image img {
+            max-width: 200%; /* Enlarges the image slightly */
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        .slide2 .img-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .slide2 .image img {
+            max-width: 100%;
+        }
+
+        .button-next2 {
+            margin-top: 15px; /* Adds space between the image and button */
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .objects-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .box {
+            width: calc(100% / 10); /* Divide into 9 columns */
+            height: 50px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            margin: 3px 2px /* Border collapse effect */
+        }
+        .number {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .object-name {
+            color: blue;
+            font-size: 14px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+        }
+        .slide3 .result-object{
+            color: white;
+            font-size: 100px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            margin-top: 60px;
+            animation: shrinkGrow 1.2s infinite; /* 1s duration for full shrink-grow cycle */
+        }
+        .slide3 .button-again{
+            background-color: rgb(128, 128, 245);
+        }
+        .slide3 .share-link{
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        @keyframes shrinkGrow {
+        0%, 100% {
+            font-size: 100px; /* Original font size */
+        }
+        50% {
+            font-size: 90px /* Reduced font size */
+        }
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div class="robbin slide1" >
+            <div class="inner-div">
+                <div class="row" style="margin: -5px;">
+                    <div class="col-md-9">
+                        <p class="pheading">Ready to be blown away?</p>
+                        <br>
+                        <p class="pcontent">First, pick any 2 digit number. (Example 24)</p><br>
+                        <p class="pcontent">Next, subtract the first and second digits from your number. (Example: 24 - 2 - 4 = 18)</p><br>
+                        <p class="pcontent">Remember your number. Then click next.</p><br><br>
+                        <div class="button button-next1">NEXT</div>
+                    </div>
+                    <div class="col-md-3" style="padding: 0px;">
+                        <div class="image">
+                            <img src="jeffrey.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="robbin slide2" style="display: none;">
+            <div class="inner-div">
+                <div class="row">
+                    <div class="col-md-9 objects-container">
+                       
+                    </div>
+                    <div class="img-right col-md-3 d-flex flex-column align-items-center" style="padding: 0;">
+                        <div class="image">
+                            <img src="jeffrey.png" alt="Image">
+                        </div>
+                        <div class="button button-next2 mt-3">NEXT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="robbin slide3" style="display: none;">
+            <div class="inner-div">
+                <div class="row">
+                    <div class="col-md-4" style="padding: 0px 7px">
+                        <div class="image">
+                            <img src="jeffrey.png">
+                        </div>
+                    </div>
+                    <div class="col-md-8 d-flex flex-column align-items-center">
+                        <div class="result-object" style="height: 150px;">Cash</div>
+                        <div class="button button-again mt-5 px-5 py-3">Play Again</div>
+                        <div class="share-link mt-4">Send this to a friend</div>
+                        <div class="share-link mt-4">Visit EdmontonMagic.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            function populateBoxes(rows, cols){
+                let array = Array.from({ length: rows }, () => Array(cols).fill(0));
+
+                let val = 1;
+                for(let i = 0; i < cols; i++){
+                    for(let j = 0; j < rows; j++){
+                        array[j][i] = val++;
+                    }
+                }
+
+                let flattenedArray = array.flat(1);
+                const container = $(".objects-container");
+                container.html('');
+                const objects = ["Lamp", "Flowers", "Orange", "Candy", "Pizza", "Carrot", "Money", "Dolphin", "Airplane", "Baseball"];
+                const boxesPerRow = 9;
+                const totalBoxes = 99;
+
+                const ninthIndexObject = objects[Math.floor(Math.random()*objects.length)];
+                for (let i = 1; i <= totalBoxes; i++) {
+                    const numberValue = flattenedArray[i-1];
+                    const box = $('<div class="box"></div>');
+                    const number = $('<div class="number"></div>').text(numberValue);
+                    const objectName = $('<div class="object-name"></div>');
+
+                    // Determine object name based on position and reuse same object every 9th box
+                    const objectIndex = Math.floor(Math.random()*objects.length);
+                    const nameText = numberValue % 9 == 0 ? ninthIndexObject : objects[objectIndex];
+                    objectName.text(nameText);
+
+                    // Append number and object name to box
+                    box.append(number);
+                    box.append(objectName);
+
+                    // Add box to the container
+                    container.append(box);
+                }
+                return ninthIndexObject;
+            }
+            let ninthIndexObject = '';
+            
+
+            $('.button-next1').click(function(){
+                $('.slide1').css('display','none');
+                $('.slide2').css('display','block');
+                ninthIndexObject = populateBoxes(11,9);
+            })
+            $('.button-next2').click(function(){
+                $('.slide2').css('display','none');
+                $('.slide3').css('display','block');
+                $('.result-object').html(ninthIndexObject);
+            })
+            $('.button-again').click(function(){
+                $('.slide3').css('display','none');
+                $('.slide1').css('display','block');
+            })
+        });
+    </script>
+</body>
+</html>
