@@ -236,21 +236,63 @@
                 return ninthIndexObject;
             }
             let ninthIndexObject = '';
-            
+            let utterances = ['So, you want me to read your mind?  Alright, let’s do it.  I want you to listen carefully.  Pick any 2-digit number.  As an example, I’ll pick 24. Once you’ve chosen a number, subtract both the first and second digits from your number.   That equals….. I need my calculator, my number 24 minus 2 minus 4 equals….18.  Now do the same for your number.    Once you’ve figured out the math, remember your number and then click the NEXT button.',
+                'Now, find the box with your number.  Memorize what’s inside that box.  Now close your eyes and visualize the item.... Once you’ve visualized that item, open your eyes and press NEXT',
+                'You are easy for me to read.... Your item was……… {{itemname}}!.  I told you I can read your mind.  And, if you think that was luck?  Then try again.'
+            ];
+            let currentUtterance = null;
+            const synth = window.speechSynthesis; 
+            function stopText(){
+
+                if (synth.speaking || synth.pending) {
+                    // If the speech is already playing or queued, stop it
+                    synth.cancel();
+                    console.log("Speech stopped.");
+                }
+            }
+            function playText(idx){         
+                // Create a new utterance and play it
+                currentUtterance = new SpeechSynthesisUtterance();
+                currentUtterance.text = utterances[idx]; 
+                currentUtterance.onstart = () => console.log("Speech started.");
+                currentUtterance.onend = () => console.log("Speech ended.");
+                currentUtterance.onerror = (e) => console.error("Speech error:", e);
+                synth.speak(currentUtterance);
+                
+            }
+
+            setTimeout(()=>{
+                playText(0);
+            }, 1000);
 
             $('.button-next1').click(function(){
                 $('.slide1').css('display','none');
                 $('.slide2').css('display','block');
+                stopText();
                 ninthIndexObject = populateBoxes(11,9);
+                setTimeout(()=>{
+                    playText(1);
+                }, 1000);
             })
             $('.button-next2').click(function(){
                 $('.slide2').css('display','none');
                 $('.slide3').css('display','block');
                 $('.result-object').html(ninthIndexObject);
+                stopText();
+                utterances[2] = utterances[2].replace("{{itemname}}",ninthIndexObject);
+                setTimeout(()=>{
+                    playText(2);
+                }, 1000);
             })
             $('.button-again').click(function(){
                 $('.slide3').css('display','none');
                 $('.slide1').css('display','block');
+                stopText();
+                utterances[2] = 'You are easy for me to read.... Your item was……… {{itemname}}!.  I told you I can read your mind.  And, if you think that was luck?  Then try again.';
+                utterances[0] = utterances[0].replace('So, you want me to read your mind?  Alright, let’s do it.','Ok,  let’s play again.  ');
+                setTimeout(()=>{
+                    playText(0);
+                }, 1000);
             })
         });
     </script>
