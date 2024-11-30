@@ -188,7 +188,7 @@
                     <div class="col-md-8 d-flex flex-column align-items-center">
                         <div class="result-object" style="height: 150px;">Cash</div>
                         <div class="button button-again mt-5 px-5 py-3">Play Again</div>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://thankful-glacier-098ca9b1e.5.azurestaticapps.net" 
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://edmontonmagic.com/regifting-robin" 
                         target="_blank" class="share-link mt-4">
                         Send this to a friend
                         </a>
@@ -204,7 +204,17 @@
     </div>
     <script>
         $(document).ready(function () {
+            const synth = window.speechSynthesis;
 
+            document.addEventListener("visibilitychange", function () {
+                if (document.visibilityState === "hidden") {
+                    if (synth.speaking || synth.pending) {
+                        synth.cancel();
+                        console.log("Speech synthesis stopped as the page became hidden.");
+                    }
+                }
+            });
+            
             function populateBoxes(rows, cols){
                 let array = Array.from({ length: rows }, () => Array(cols).fill(0));
 
@@ -249,7 +259,7 @@
                 'You are easy for me to read.... Your item was……… {{itemname}}!.  I told you I can read your mind.  And, if you think that was luck?  Then try again.'
             ];
             let currentUtterance = null;
-            const synth = window.speechSynthesis; 
+            
             function stopText(){
 
                 if (synth.speaking || synth.pending) {
